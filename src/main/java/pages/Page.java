@@ -13,7 +13,7 @@ public class Page {
         this.wait = wait;
     }
 
-    public <TPage> TPage getInstnce(Class<TPage> pageClass){
+    public <TPage> TPage getPage(Class<TPage> pageClass){
         try {
             return pageClass.getDeclaredConstructor(
                     WebDriver.class, WebDriverWait.class)

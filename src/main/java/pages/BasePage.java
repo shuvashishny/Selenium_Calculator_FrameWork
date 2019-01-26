@@ -20,10 +20,11 @@ public class BasePage extends Page {
 
     public void writeText(By element, String text){
         waitForElementVisible(element);
+        driver.findElement(element).clear();
         driver.findElement(element).sendKeys(text);
     }
 
-    public String getText(By element){
+    public String findText(By element){
         waitForElementVisible(element);
         return driver.findElement(element).getText();
     }

@@ -1,5 +1,6 @@
 package tests;
 
+import browser.ThreadLocalDriverFactory;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -19,21 +20,13 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters("browser")
-    public void setUp(@Optional("chrome")String bValue ){
+    public void setUp(@Optional("firefox")String browser ){
 
-        String browser = bValue;
-        switch (browser.toUpperCase()) {
-            case "CHROME":
-                WebDriverManager.chromedriver().setup();
-                //Create a Chrome driver. All test classes use this.
-                driver = new ChromeDriver();
-                break;
-
-            case "FIREFOX":
-                WebDriverManager.firefoxdriver().setup();
-                driver = new FirefoxDriver();
-                break;
-        }
+        //Set & Get ThreadLocal Driver with Browser
+        System.out.println("Browser is "+browser);
+        ThreadLocalDriverFactory.setDriver(browser);
+        wait = new WebDriverWait(ThreadLocalDriverFactory.getDriver(), 15);
+        driver = ThreadLocalDriverFactory.getDriver();
 
         //Create a wait. All test classes use this.
         wait = new WebDriverWait(driver,30);

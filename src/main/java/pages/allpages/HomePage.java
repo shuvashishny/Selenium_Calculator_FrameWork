@@ -23,10 +23,12 @@ public class HomePage extends BasePage {
     }
 
     public void clickLinkFromOtherCalculator(String linkName){
-        List<WebElement> links = driver.findElements(otherCalculatorLinks);
 
         for(WebElement element: getElements(otherCalculatorLinks)){
-            if(getText(element).equalsIgnoreCase())
+            if(element.getText().equalsIgnoreCase(linkName)){
+                element.click();
+                break;
+            }
         }
     }
 
